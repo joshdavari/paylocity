@@ -7,7 +7,7 @@ import {
 
 describe('calculateIndividualEmployeeCost', () => {
     it('should return full amount if employee name does not start with "a"', () =>{
-        const testEmployee = { name: 'Bill', dependents: [] };
+        const testEmployee = { name: 'Bill', paycheckAmount: 0, dependents: [] };
 
         const result = calculateIndividualEmployeeCost(testEmployee);
 
@@ -15,7 +15,7 @@ describe('calculateIndividualEmployeeCost', () => {
     });
 
     it('should return discounted amount if employee name starts with "a"', () =>{
-        const testEmployee = { name: 'alex', dependents: [] };
+        const testEmployee = { name: 'alex', paycheckAmount: 0, dependents: [] };
 
         const result = calculateIndividualEmployeeCost(testEmployee);
 

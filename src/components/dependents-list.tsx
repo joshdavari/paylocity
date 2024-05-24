@@ -5,6 +5,10 @@ import type { Dependent } from '../types/people';
 type Props = { dependents: Dependent[] };
 
 const DependentsList = ({ dependents }: Props) => {
+    const addDependent = () => {
+        dependents.push({ name: '' });
+    };
+
     return <>
         <h3>Dependents</h3>
         <table>
@@ -15,7 +19,7 @@ const DependentsList = ({ dependents }: Props) => {
             {dependents.map(dependent => <DependentCost dependent={dependent} />)}
         </table>
 
-        <button>Add dependent</button>
+        <button onClick={addDependent}>Add dependent</button>
 
         <div>Total dependents benefits cost: $xx.xx</div>
     </>
