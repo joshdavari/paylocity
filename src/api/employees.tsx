@@ -1,4 +1,4 @@
-import { Employee } from '../types/employee';
+import { Employee } from '../types/people';
 
 let savedEmployee: Employee = { name: '', dependents: [] };
 
