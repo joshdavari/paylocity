@@ -6,7 +6,7 @@ import { formatCurrency } from '../lib/format';
 import DependentsList from './dependents-list';
 import './employee-benefits.css';
 
-import type { Employee } from '../types/people';
+import type { Dependent, Employee } from '../types/people';
 
 const EmployeeBenefits = () => {
     const [employee, setEmployee] = useState<Employee>();
@@ -19,7 +19,11 @@ const EmployeeBenefits = () => {
 
     const individualEmployeeCost = calculateIndividualEmployeeCost(employee);
 
-    const changeEmployeeName = (name: string) => setEmployee({ ...employee, name });
+    const updateDependents = (dependents: Dependent[]) => {
+        setEmployee({ ...employee, dependents });
+    };
+
+    const updateEmployeeName = (name: string) => setEmployee({ ...employee, name });
     const saveChanges = () => saveEmployee(employee);
 
     return <>
@@ -27,7 +31,7 @@ const EmployeeBenefits = () => {
             <label>
                 Employee name:{' '}
                 <input
-                    onChange={e => changeEmployeeName(e.target.value)}
+                    onChange={e => updateEmployeeName(e.target.value)}
                     placeholder='Name'
                     value={employee.name}
                 />
@@ -37,7 +41,7 @@ const EmployeeBenefits = () => {
         <div>Paycheck amount: {formatCurrency(employee.paycheckAmount)}</div>
         <div>Employee benefits cost: {formatCurrency(individualEmployeeCost)}</div>
 
-        <DependentsList dependents={employee.dependents} />
+        <DependentsList dependents={employee.dependents} onChange={updateDependents} />
 
         <div>Total benefits cost: $xx.xx</div>
         <div>Paycheck amount after deduction: $x,xxx.xx</div>

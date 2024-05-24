@@ -1,12 +1,28 @@
-import DependentCost from './dependent-cost';
+import IndividualDependent from './individual-dependent';
 
 import type { Dependent } from '../types/people';
 
-type Props = { dependents: Dependent[] };
+type Props = {
+    dependents: Dependent[],
+    onChange: (_: Dependent[]) => void,
+};
 
-const DependentsList = ({ dependents }: Props) => {
+const DependentsList = ({ dependents, onChange }: Props) => {
     const addDependent = () => {
-        dependents.push({ name: '' });
+        const newDependents = [...dependents, { name: '' }];
+        onChange(newDependents);
+    };
+
+    const renameDependent = (index: number, newName: string) => {
+        const newDependents = [...dependents];
+        newDependents[index].name = newName;
+        onChange(newDependents);
+    };
+
+    const removeDependent = (index: number) => {
+        const newDependents = [...dependents];
+        newDependents.splice(index, 1);
+        onChange(newDependents);
     };
 
     return <>
@@ -16,7 +32,15 @@ const DependentsList = ({ dependents }: Props) => {
                 <td>Name</td>
                 <td>Cost</td>
             </tr>
-            {dependents.map(dependent => <DependentCost dependent={dependent} />)}
+        
+            {dependents.map((dependent, i) => (
+                <IndividualDependent
+                    index={i}
+                    dependent={dependent}
+                    onRemove={removeDependent}
+                    onChangeName={renameDependent}
+                />)
+            )}
         </table>
 
         <button onClick={addDependent}>Add dependent</button>
