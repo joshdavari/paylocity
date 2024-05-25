@@ -1,7 +1,6 @@
-import IndividualDependent from './individual-dependent';
-
 import { calculateTotalDependentsCost } from '../lib/cost-calculator';
 import { formatCurrency } from '../lib/format';
+import IndividualDependent from './individual-dependent';
 import './dependents-list.css';
 
 import type { Dependent } from '../types/people';
@@ -34,10 +33,10 @@ const DependentsList = ({ dependents, onChange }: Props) => {
     return <>
         <h3>Dependents</h3>
         <table>
-            <tr>
+            {!dependents.length ? null : <tr>
                 <td>Name</td>
                 <td>Cost</td>
-            </tr>
+            </tr>}
         
             {dependents.map((dependent, i) => (
                 <IndividualDependent

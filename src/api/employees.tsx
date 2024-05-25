@@ -1,10 +1,10 @@
 import { Employee } from '../types/people';
 
 let savedEmployee: Employee = {
-    name: 'John Doe',
+    name: 'Jill Jacobs',
     paycheckAmount: 2000,
     dependents: [
-        { name: 'Aaron Aaronsen' },
+        { name: 'Alex Alexo' },
         { name: 'Baron Baronsen' },
     ],
 };

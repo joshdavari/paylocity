@@ -1,6 +1,7 @@
-import { Dependent } from '../types/people';
 import { calculateIndividualDependentCost } from '../lib/cost-calculator';
 import { formatCurrency } from '../lib/format';
+
+import type { Dependent } from '../types/people';
 
 type Props = {
     dependent: Dependent,
