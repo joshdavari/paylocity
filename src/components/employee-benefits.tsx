@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { getEmployee, saveEmployee } from '../api/employees';
-import { calculateIndividualEmployeeCost } from '../lib/cost-calculator';
+import { calculateIndividualEmployeeCost, calculateTotalBenefitsCost } from '../lib/cost-calculator';
 import { formatCurrency } from '../lib/format';
 import DependentsList from './dependents-list';
 import './employee-benefits.css';
@@ -18,12 +18,14 @@ const EmployeeBenefits = () => {
     if (!employee) return <div>Please wait...</div>;
 
     const individualEmployeeCost = calculateIndividualEmployeeCost(employee);
+    const totalBenefitsCost = calculateTotalBenefitsCost(employee);
+    const netPaycheckAmount = employee.paycheckAmount - totalBenefitsCost;
 
     const updateDependents = (dependents: Dependent[]) => {
         setEmployee({ ...employee, dependents });
     };
 
-    const updateEmployeeName = (name: string) => setEmployee({ ...employee, name });
+    const renameEmployee = (newName: string) => setEmployee({ ...employee, name: newName.trim() });
     const saveChanges = () => saveEmployee(employee);
 
     return <>
@@ -31,7 +33,7 @@ const EmployeeBenefits = () => {
             <label>
                 Employee name:{' '}
                 <input
-                    onChange={e => updateEmployeeName(e.target.value)}
+                    onChange={e => renameEmployee(e.target.value)}
                     placeholder='Name'
                     value={employee.name}
                 />
@@ -43,8 +45,8 @@ const EmployeeBenefits = () => {
 
         <DependentsList dependents={employee.dependents} onChange={updateDependents} />
 
-        <div>Total benefits cost: $xx.xx</div>
-        <div>Paycheck amount after deduction: $x,xxx.xx</div>
+        <div>Total benefits cost: {formatCurrency(totalBenefitsCost)}</div>
+        <div>Paycheck amount after deduction: {formatCurrency(netPaycheckAmount)}</div>
 
         <button className='save-button' onClick={saveChanges}>
             Save changes

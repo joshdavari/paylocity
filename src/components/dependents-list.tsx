@@ -1,5 +1,9 @@
 import IndividualDependent from './individual-dependent';
 
+import { calculateTotalDependentsCost } from '../lib/cost-calculator';
+import { formatCurrency } from '../lib/format';
+import './dependents-list.css';
+
 import type { Dependent } from '../types/people';
 
 type Props = {
@@ -15,7 +19,7 @@ const DependentsList = ({ dependents, onChange }: Props) => {
 
     const renameDependent = (index: number, newName: string) => {
         const newDependents = [...dependents];
-        newDependents[index].name = newName;
+        newDependents[index].name = newName.trim();
         onChange(newDependents);
     };
 
@@ -24,6 +28,8 @@ const DependentsList = ({ dependents, onChange }: Props) => {
         newDependents.splice(index, 1);
         onChange(newDependents);
     };
+
+    const totalDependentsCost = calculateTotalDependentsCost(dependents);
 
     return <>
         <h3>Dependents</h3>
@@ -43,9 +49,11 @@ const DependentsList = ({ dependents, onChange }: Props) => {
             )}
         </table>
 
-        <button onClick={addDependent}>Add dependent</button>
+        <button className='add-button' onClick={addDependent}>
+            Add dependent
+        </button>
 
-        <div>Total dependents benefits cost: $xx.xx</div>
+        <div>Total dependents benefits cost: {formatCurrency(totalDependentsCost)}</div>
     </>
 };
 
