@@ -24,3 +24,15 @@ export const calculateIndividualEmployeeCost = (employee: Employee): number => {
 export const calculateIndividualDependentCost = (dependent: Dependent): number => {
     return calculateIndividualCostPerPaycheck(annualDependentBenefitsCost, dependent);
 };
+
+export const calculateTotalDependentsCost = (dependents: Dependent[]): number => {
+    return dependents
+        .map(calculateIndividualDependentCost)
+        .reduce((sum, cost) => sum + cost, 0);
+};
+
+export const calculateTotalBenefitsCost = (employee: Employee): number => {
+    const employeeCost = calculateIndividualEmployeeCost(employee);
+    const dependentsCost = calculateTotalDependentsCost(employee.dependents);
+    return employeeCost + dependentsCost;
+};

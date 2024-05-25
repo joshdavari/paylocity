@@ -3,6 +3,8 @@ import { describe, expect, it } from 'vitest';
 import {
     calculateIndividualDependentCost,
     calculateIndividualEmployeeCost,
+    calculateTotalBenefitsCost,
+    calculateTotalDependentsCost,
 } from './cost-calculator';
 
 describe('calculateIndividualEmployeeCost', () => {
@@ -38,5 +40,29 @@ describe('calculateIndividualDependentCost', () => {
         const result = calculateIndividualDependentCost(testDependent);
 
         expect(result).toBeCloseTo(17.31, 2);
+    });
+});
+
+describe('calculateTotalDependentsCost', () => {
+    it('should return sum of individual dependent costs', () =>{
+        const testDependents = [{ name: 'alex' }, { name: 'kris' }];
+
+        const result = calculateTotalDependentsCost(testDependents);
+
+        expect(result).toBeCloseTo(36.54, 2);
+    });
+});
+
+describe('calculateTotalBenefitsCost', () => {
+    it('should return sum of individual dependent costs', () =>{
+        const testEmployee = {
+            name: 'jane',
+            paycheckAmount: 0,
+            dependents: [{ name: 'alex' }, { name: 'kris' }]
+        };
+
+        const result = calculateTotalBenefitsCost(testEmployee);
+
+        expect(result).toBeCloseTo(75, 2);
     });
 });
