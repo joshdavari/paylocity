@@ -15,6 +15,6 @@ export const getEmployee = async (): Promise<Employee> => {
 };
 
 export const saveEmployee = async (employee: Employee): Promise<void> => {
-    console.log('PUT /employees/current'); 
+    console.log('PUT /employees/current', JSON.stringify(employee)); 
     savedEmployee = employee;
 }
