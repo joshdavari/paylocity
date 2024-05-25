@@ -53,7 +53,7 @@ const DependentsList = ({ dependents, onChange }: Props) => {
         </button>
 
         <div>Total dependents benefits cost: {formatCurrency(totalDependentsCost)}</div>
-    </>
+    </>;
 };
 
 export default DependentsList;

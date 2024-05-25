@@ -29,7 +29,7 @@ const IndividualDependent = ({ dependent, index, onChangeName, onRemove }: Props
                 Remove
             </button>
         </td>
-    </tr>
+    </tr>;
 };
 
 export default IndividualDependent;

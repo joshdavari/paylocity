@@ -51,7 +51,7 @@ const EmployeeBenefits = () => {
         <button className='save-button' onClick={saveChanges}>
             Save changes
         </button>
-    </>
+    </>;
 };
 
 export default EmployeeBenefits;
