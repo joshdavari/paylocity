@@ -19,5 +19,7 @@ I would also add unit tests for the React components using React Testing Library
 ## Assumptions
 - Since requirements didn't specify if first or last name needs to start with 'A' for 
 discount to apply, just collect whole name as a single value and check first character
-(after trimming whitespace)
-- Use case-insensitive check for names that start with 'A'
+(after trimming whitespace).
+- Use case-insensitive check for names that start with 'A'.
+- The requirements say to store data in memory, but also that changes should be reflected on future page loads.
+I interpreted the latter requirement to mean "if we were actually saving to an API, the changes would persist".
